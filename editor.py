@@ -40,6 +40,7 @@ def main():
 
     import qutepart  # after correct sys.path has been set
 
+
     with open(ns.file) as file:
         text = unicode(file.read(), 'utf8')
 

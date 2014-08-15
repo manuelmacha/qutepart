@@ -6,6 +6,9 @@ import os.path
 import logging
 import platform
 
+import sip
+sip.setapi('QString', 2)
+
 from PyQt4.QtCore import QRect, Qt, pyqtSignal
 from PyQt4.QtGui import QAction, QApplication, QColor, QBrush, \
                         QDialog, QFont, \
@@ -23,6 +26,7 @@ from qutepart.rectangularselection import RectangularSelection
 import qutepart.sideareas
 from qutepart.indenter import Indenter
 import qutepart.bookmarks
+
 
 
 VERSION = (2, 1, 0)
@@ -1270,3 +1274,15 @@ def iterateBlocksBackFrom(block):
     while block.isValid():
         yield block
         block = block.previous()
+
+
+
+if __name__ == '__main__':
+    import sys
+
+    app = QApplication(sys.argv)
+    qp = Qutepart()
+    qp.detectSyntax(language = 'Python')
+    qp.show()
+    qp.raise_()
+    sys.exit(app.exec_())
