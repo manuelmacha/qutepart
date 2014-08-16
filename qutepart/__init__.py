@@ -1279,10 +1279,31 @@ def iterateBlocksBackFrom(block):
 
 if __name__ == '__main__':
     import sys
-
+    
     app = QApplication(sys.argv)
     qp = Qutepart()
     qp.detectSyntax(language = 'Python')
+    qp.text = '''
+def testFunc():
+    """ comment """
+    return
+
+class TestClass(object):
+    def __init__(self):
+        self.var = None
+        
+tc = TestClass()
+'''
+    
+    execResult = {}
+    exec qp.text in execResult
+    del execResult['__builtins__']
+    for key in execResult.keys():
+        print key
+        
+
+    
     qp.show()
+    
     qp.raise_()
     sys.exit(app.exec_())
